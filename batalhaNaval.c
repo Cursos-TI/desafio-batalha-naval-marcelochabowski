@@ -49,15 +49,13 @@ int main(){
     int tentativasJogador = 0, tentativasCPU = 0;
     srand(time(NULL));
 
-    // Inicializa o tabuleiro com água
     for (int i = 0; i < TAM; i++)
         for (int j = 0; j < TAM; j++)
             tabuleiro[i][j] = AGUA;
 
-    // Posiciona os navios
     posicionarNavio(tabuleiro, NAVIO_JOGADOR, &xJog, &yJog);
     posicionarNavio(tabuleiro, NAVIO_CPU, &xCPU, &yCPU);
-
+// posicionando os navio na agua, utilizando a função e variaveis
     printf("Bem-vindo a batalha naval\n");
     while (!acertouJogador && !acertouCPU) {
         imprimirTabuleiro(tabuleiro);
@@ -81,9 +79,39 @@ int main(){
             printf("Ja atirou aqui.\n");
         }
         if (acertouJogador) break;
-        // Aqui você pode implementar a jogada da CPU se desejar
-    }
+        
+        printf("\nVez da CPU\n")
+        int cx, cy;
+        do { 
+            cx = rand() % TAM;
+            cy = rand() % TAM;
+        } while (tabuleiro[cx][cy] == TIRO_AGUA || tabuleiro[cx][cy] == TIRO_NAVIO);
 
+        tentativasCPU++;
+        printf("CPU atirou em (%d, %d)\n", cx, cy);
+        if (tabuleiro[cx][cy] == NAVIO_JOGADOR) {
+            printf("A CPU acertou voce!\n");
+            acertouCPU = 1;
+        } else if (tabuleiro[cx][cy] == NAVIO_CPU) {
+            printf("A CPU fez fogo amigo!\n");
+            tabuleiro[cx][cy] = TIRO_NAVIO;
+        } else {
+            printf("CPU acertou agua !\n");
+            tabuleiro[cx][cy] = TIRO_AGUA;
+        }
+    }
+    // usando loop com while para fica rodando o jogo
+    // e usando as variaveis if e else criei coodernadas e regras
+    printf("\nTabulheiro revelado:\n")
+    for (int = 0; i <TAM; i++)
+    for (int j = 0; j < TAM; j++)
+if (tabuleiro[i][j] == NAVIO_JOGADOR || tabuleiro [i][j] == NAVIO_CPU)
+ tabuleiro[i][j] = '*';
+imprimirTabuleiro(tabuleiro);
+if (acertouJogador)
+ printf("\nParabens! voce ganhou em %d disparo.\n", tentativasJogador);
+else
+printf("\nA CPU venceu em %d disparo.\n", tentativasCPU);
     printf("Fim de jogo!\n");
     return 0;
 }
