@@ -1,40 +1,71 @@
+// Desafio Batalha Naval - MarceloCaboski
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-// Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
+#define TAM 10 // usando um macro para define o tabulheiro
+const char agua = 'a'; 
+const char NAVIO_JOGADOR = 'j';
+const char NAVIO_CPU = 'c';
+const char TIRO_AGUA = 'O';
+const char TIRO_NAVIO = 'X';
+// usando const char para deixa o codigo mais limpo e manter os caracteres do jogo
 
-int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+void imprimirCelula(char c){
+    if ( c == NAVIO_JOGADOR || c == NAVIO_CPU)
+     printf("[A]");
+    else
+     printf("[%c]", c);
+    // variavel void para nao retorna e para esconder o navio
+}
+void imprimirTabuleiro(char tabuleiro[TAM][TAM]) {
+    printf("  ");
+    for (int j = 0; j < TAMANHO; j++)
+       printf("%2d ",j);
+    printf("\n");
+    for(int i = 0; i < TAMANHO; i++){
+        printf("%2d ",i);
+        for (int j = 0; j < TAMANHO; j++) {
+          imprimirCelula(tabuleiro[i][j]);
+        }
+    printf("\n");    
+    }
+}
+// usando funcao imprimircelular/tabuleiro e variavel para deixa o jogo visual
+void posicionarNavio(char tabuleiro[TAM][TAM], char navio, int *x, int *y){
+    do{
+        *x = rand() % TAM;
+        *y = rand() % TAM;
+    }
+     while (tabuleiro[*x][*y] != AGUA);
+      tabuleiro[*x][*y] = navio;
+}
+// usando funcao posicionar para colocar os navios, usando rando para colocar dentro do limite.
+// while para colocar aleatrorio
+int main(){
+    char tabuleiro[TAM][TAM];
+    int xJog,yJog,xCPU,yCPU;
+    int acertouJogador = 0, acertouCPU = 0;
+    int tentativasJogador = 0, tentativasCPU = 0;
+    srand(time(NULL));
+}
+// usando a funcao int main cria pontuacao e usar o tabuleiro unico para ambos jogadores e srand para gerar jogo aleatorios
+ for (int i =0; i < TAMANHO; i++)
+     for (int j = 0, j < TAMANHO; j++)
+     tabuleiro[i][j] = AGUA;
+    posicionarNavio(tabuleiro, NAVIO_JOGADOR, &xJog,&yJog);
+    posicionarNavio(tabuleiro, NAVIO_CPU,&xCPU,&yJog);
+ // variavel para posicionar navios
+ printf("Bem-vindo a batalha naval\n');
+    while (!acertouJOGADOR && !acertouCPU)
 
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+                               
 
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
 
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
 
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
+
+
+
 
     return 0;
 }
